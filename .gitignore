@@ -1,0 +1,23 @@
+# Personal Documents
+Angel Pulido - WPRs
+Arduino
+Arduino
+Lectures
+Resources
+Syllabus
+EE 175.code-workspace
+
+# PlatformIO - Temporary build files
+.pio/
+.pioenvs/
+.piolibdeps/
+
+# VS Code - Local user settings
+.vscode/
+
+# OS - System files
+.DS_Store
+Thumbs.db
+
+# Secrets - Never share passwords!
+include/secrets.h
