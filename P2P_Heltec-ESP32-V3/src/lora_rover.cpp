@@ -14,8 +14,8 @@
 */
 #include "heltec_unofficial.h"
 
-#define FREQ 915.0  // Frequency band (US: 915E6)
-#define BW   125.0  // Bandwidth
+#define FREQ 915.0  // Frequency band (MHz) (US: 915)
+#define BW   500.0  // Bandwidth (kHz)
 #define SF   7      // Spreading Factor (lower -> faster)
 #define CR   5      // Coding Rate
 #define STICK_THRESH 0.3  // threshold for detecting movement
