@@ -1,0 +1,228 @@
+[33mFactory Details:[0m
+  [94mRank                     [0mprimary (256)[0m
+  [94mLong-name                [0mlibcamera Source[0m
+  [94mKlass                    [0mSource/Video[0m
+  [94mDescription              [0mLinux Camera source using libcamera[0m
+  [94mAuthor                   [0mNicolas Dufresne <nicolas.dufresne@collabora.com>[0m
+
+[33mPlugin Details[0m:
+  [94mName                     [0m[0mlibcamera[0m
+  [94mDescription              [0m[0mlibcamera capture plugin[0m
+  [94mFilename                 [0m[0m/usr/lib/aarch64-linux-gnu/gstreamer-1.0/libgstlibcamera.so[0m
+  [94mVersion                  [0m[0m0.5.2+99-bfd68f78[0m
+  [94mLicense                  [0m[0mLGPL[0m
+  [94mSource module            [0m[0mlibcamera[0m
+  [94mBinary package           [0m[0mlibcamera[0m
+  [94mOrigin URL               [0m[0mhttps://libcamera.org[0m
+
+[32mGObject[0m
+ [95m+----[0m[32mGInitiallyUnowned[0m
+       [95m+----[0m[32mGstObject[0m
+             [95m+----[0m[32mGstElement[0m
+                   [95m+----[0m[32mGstLibcameraSrc[0m
+
+[33mImplemented Interfaces[0m:
+  [32mGstChildProxy[0m
+
+[33mPad Templates[0m:
+  [94mSRC template[0m: [0m'src'[0m
+    [94mAvailability[0m: [0mAlways[0m
+    [94mCapabilities[0m:
+      [33mvideo/x-raw[0m
+      [33mimage/jpeg[0m
+      [33mvideo/x-bayer[0m
+    [94mType[0m: [32mGstLibcameraPad[0m
+    [33mPad Properties[0m:
+    
+      [94mstream-role         [0m: [0mThe selected stream role[0m
+                            [33mflags[0m: [36mreadable[0m, [36mwritable[0m, [36mchangeable only in NULL or READY state[0m
+                            [32mEnum "GstLibcameraStreamRole"[0m [33mDefault[0m: [36m2, "video-recording"[0m
+                               [33m(1)[0m: [36mstill-capture   [0m - [0mlibcamera::StillCapture[0m
+                               [33m(2)[0m: [36mvideo-recording [0m - [0mlibcamera::VideoRecording[0m
+                               [33m(3)[0m: [36mview-finder     [0m - [0mlibcamera::Viewfinder[0m
+      
+  
+  [94mSRC template[0m: [0m'src_%u'[0m
+    [94mAvailability[0m: [0mOn request[0m
+    [94mCapabilities[0m:
+      [33mvideo/x-raw[0m
+      [33mimage/jpeg[0m
+      [33mvideo/x-bayer[0m
+    [94mType[0m: [32mGstLibcameraPad[0m
+    [33mPad Properties[0m:
+    
+      [94mstream-role         [0m: [0mThe selected stream role[0m
+                            [33mflags[0m: [36mreadable[0m, [36mwritable[0m, [36mchangeable only in NULL or READY state[0m
+                            [32mEnum "GstLibcameraStreamRole"[0m [33mDefault[0m: [36m2, "video-recording"[0m
+                               [33m(1)[0m: [36mstill-capture   [0m - [0mlibcamera::StillCapture[0m
+                               [33m(2)[0m: [36mvideo-recording [0m - [0mlibcamera::VideoRecording[0m
+                               [33m(3)[0m: [36mview-finder     [0m - [0mlibcamera::Viewfinder[0m
+      
+
+[0mElement has no clocking capabilities.[0m
+[0mElement has no URI handling capabilities.[0m
+
+[33mPads:[0m
+  [94mSRC[0m: [0m'src'[0m
+    [94mPad Template[0m: [0m'src'[0m
+
+[33mElement Properties[0m:
+
+  [94mae-constraint-mode  [0m: [0mSpecify a constraint mode for the AE algorithm to use. The constraint modes determine how the measured scene brightness is adjusted to reach the desired target exposure. Constraint modes may be platform specific, and not all constraint modes may be supported. [0m
+                        [33mflags[0m: [36mreadable[0m, [36mwritable[0m, [36mcontrollable[0m
+                        [32mEnum "AeConstraintMode"[0m [33mDefault[0m: [36m0, "normal"[0m
+                           [33m(0)[0m: [36mnormal          [0m - [0mDefault constraint mode. This mode aims to balance the exposure of different parts of the image so as to reach a reasonable average level. However, highlights in the image may appear over-exposed and lowlights may appear under-exposed. [0m
+                           [33m(1)[0m: [36mhighlight       [0m - [0mHighlight constraint mode. This mode adjusts the exposure levels in order to try and avoid over-exposing the brightest parts (highlights) of an image. Other non-highlight parts of the image may appear under-exposed. [0m
+                           [33m(2)[0m: [36mshadows         [0m - [0mShadows constraint mode. This mode adjusts the exposure levels in order to try and avoid under-exposing the dark parts (shadows) of an image. Other normally exposed parts of the image may appear over-exposed. [0m
+                           [33m(3)[0m: [36mcustom          [0m - [0mCustom constraint mode. [0m
+  
+  [94mae-enable           [0m: [0mEnable or disable the AEGC algorithm. When this control is set to true, both ExposureTimeMode and AnalogueGainMode are set to auto, and if this control is set to false then both are set to manual. If ExposureTimeMode or AnalogueGainMode are also set in the same request as AeEnable, then the modes supplied by ExposureTimeMode or AnalogueGainMode will take precedence. See also: exposure-time-mode, analogue-gain-mode. [0m
+                        [33mflags[0m: [36mreadable[0m, [36mwritable[0m, [36mcontrollable[0m
+                        [32mBoolean[0m. [33mDefault[0m: [36mfalse[0m
+  
+  [94mae-exposure-mode    [0m: [0mSpecify an exposure mode for the AE algorithm to use. The exposure modes specify how the desired total exposure is divided between the exposure time and the sensor's analogue gain. They are platform specific, and not all exposure modes may be supported. When one of AnalogueGainMode or ExposureTimeMode is set to Manual, the fixed values will override any choices made by AeExposureMode. See also: analogue-gain-mode. See also: exposure-time-mode. [0m
+                        [33mflags[0m: [36mreadable[0m, [36mwritable[0m, [36mcontrollable[0m
+                        [32mEnum "AeExposureMode"[0m [33mDefault[0m: [36m0, "normal"[0m
+                           [33m(0)[0m: [36mnormal          [0m - [0mDefault exposure mode. [0m
+                           [33m(1)[0m: [36mshort           [0m - [0mExposure mode allowing only short exposure times. [0m
+                           [33m(2)[0m: [36mlong            [0m - [0mExposure mode allowing long exposure times. [0m
+                           [33m(3)[0m: [36mcustom          [0m - [0mCustom exposure mode. [0m
+  
+  [94mae-flicker-period   [0m: [0mManual flicker period in microseconds. This value sets the current flicker period to avoid. It is used when AeFlickerMode is set to FlickerManual. To cancel 50Hz mains flicker, this should be set to 10000 (corresponding to 100Hz), or 8333 (120Hz) for 60Hz mains. Setting the mode to FlickerManual when no AeFlickerPeriod has ever been set means that no flicker cancellation occurs (until the value of this control is updated). Switching to modes other than FlickerManual has no effect on the value of the AeFlickerPeriod control. See also: ae-flicker-mode. [0m
+                        [33mflags[0m: [36mreadable[0m, [36mwritable[0m, [36mcontrollable[0m
+                        [32mInteger[0m. [33mRange[0m: [36m-2147483648 - 2147483647[0m [33mDefault[0m: [36m0[0m 
+  
+  [94mae-metering-mode    [0m: [0mSpecify a metering mode for the AE algorithm to use. The metering modes determine which parts of the image are used to determine the scene brightness. Metering modes may be platform specific and not all metering modes may be supported. [0m
+                        [33mflags[0m: [36mreadable[0m, [36mwritable[0m, [36mcontrollable[0m
+                        [32mEnum "AeMeteringMode"[0m [33mDefault[0m: [36m0, "centre-weighted"[0m
+                           [33m(0)[0m: [36mcentre-weighted [0m - [0mCentre-weighted metering mode. [0m
+                           [33m(1)[0m: [36mspot            [0m - [0mSpot metering mode. [0m
+                           [33m(2)[0m: [36mmatrix          [0m - [0mMatrix metering mode. [0m
+                           [33m(3)[0m: [36mcustom          [0m - [0mCustom metering mode. [0m
+  
+  [94maf-metering         [0m: [0mThe parts of the image used by the AF algorithm to measure focus. [0m
+                        [33mflags[0m: [36mreadable[0m, [36mwritable[0m, [36mcontrollable[0m
+                        [32mEnum "AfMetering"[0m [33mDefault[0m: [36m0, "auto"[0m
+                           [33m(0)[0m: [36mauto            [0m - [0mLet the AF algorithm decide for itself where it will measure focus. [0m
+                           [33m(1)[0m: [36mwindows         [0m - [0mUse the rectangles defined by the AfWindows control to measure focus. If no windows are specified the behaviour is platform dependent. [0m
+  
+  [94maf-mode             [0m: [0mThe mode of the AF (autofocus) algorithm. An implementation may choose not to implement all the modes. [0m
+                        [33mflags[0m: [36mreadable[0m, [36mwritable[0m, [36mcontrollable[0m
+                        [32mEnum "AfMode"[0m [33mDefault[0m: [36m0, "manual"[0m
+                           [33m(0)[0m: [36mmanual          [0m - [0mThe AF algorithm is in manual mode. In this mode it will never perform any action nor move the lens of its own accord, but an application can specify the desired lens position using the LensPosition control. The AfState will always report AfStateIdle. If the camera is started in AfModeManual, it will move the focus lens to the position specified by the LensPosition control. This mode is the recommended default value for the AfMode control. External cameras (as reported by the Location property set to CameraLocationExternal) may use a different default value. [0m
+                           [33m(1)[0m: [36mauto            [0m - [0mThe AF algorithm is in auto mode. In this mode the algorithm will never move the lens or change state unless the AfTrigger control is used. The AfTrigger control can be used to initiate a focus scan, the results of which will be reported by AfState. If the autofocus algorithm is moved from AfModeAuto to another mode while a scan is in progress, the scan is cancelled immediately, without waiting for the scan to finish. When first entering this mode the AfState will report AfStateIdle. When a trigger control is sent, AfState will report AfStateScanning for a period before spontaneously changing to AfStateFocused or AfStateFailed, depending on the outcome of the scan. It will remain in this state until another scan is initiated by the AfTrigger control. If a scan is cancelled (without changing to another mode), AfState will return to AfStateIdle. [0m
+                           [33m(2)[0m: [36mcontinuous      [0m - [0mThe AF algorithm is in continuous mode. In this mode the lens can re-start a scan spontaneously at any moment, without any user intervention. The AfState still reports whether the algorithm is currently scanning or not, though the application has no ability to initiate or cancel scans, nor to move the lens for itself. However, applications can pause the AF algorithm from continuously scanning by using the AfPause control. This allows video or still images to be captured whilst guaranteeing that the focus is fixed. When set to AfModeContinuous, the system will immediately initiate a scan so AfState will report AfStateScanning, and will settle on one of AfStateFocused or AfStateFailed, depending on the scan result. [0m
+  
+  [94maf-range            [0m: [0mThe range of focus distances that is scanned. An implementation may choose not to implement all the options here. [0m
+                        [33mflags[0m: [36mreadable[0m, [36mwritable[0m, [36mcontrollable[0m
+                        [32mEnum "AfRange"[0m [33mDefault[0m: [36m0, "normal"[0m
+                           [33m(0)[0m: [36mnormal          [0m - [0mA wide range of focus distances is scanned. Scanned distances cover all the way from infinity down to close distances, though depending on the implementation, possibly not including the very closest macro positions. [0m
+                           [33m(1)[0m: [36mmacro           [0m - [0mOnly close distances are scanned. [0m
+                           [33m(2)[0m: [36mfull            [0m - [0mThe full range of focus distances is scanned. This range is similar to AfRangeNormal but includes the very closest macro positions. [0m
+  
+  [94maf-speed            [0m: [0mDetermine whether the AF is to move the lens as quickly as possible or more steadily. For example, during video recording it may be desirable not to move the lens too abruptly, but when in a preview mode (waiting for a still capture) it may be helpful to move the lens as quickly as is reasonably possible. [0m
+                        [33mflags[0m: [36mreadable[0m, [36mwritable[0m, [36mcontrollable[0m
+                        [32mEnum "AfSpeed"[0m [33mDefault[0m: [36m0, "normal"[0m
+                           [33m(0)[0m: [36mnormal          [0m - [0mMove the lens at its usual speed. [0m
+                           [33m(1)[0m: [36mfast            [0m - [0mMove the lens more quickly. [0m
+  
+  [94maf-windows          [0m: [0mThe focus windows used by the AF algorithm when AfMetering is set to AfMeteringWindows. The units used are pixels within the rectangle returned by the ScalerCropMaximum property. In order to be activated, a rectangle must be programmed with non-zero width and height. Internally, these rectangles are intersected with the ScalerCropMaximum rectangle. If the window becomes empty after this operation, then the window is ignored. If all the windows end up being ignored, then the behaviour is platform dependent. On platforms that support the ScalerCrop control (for implementing digital zoom, for example), no automatic recalculation or adjustment of AF windows is performed internally if the ScalerCrop is changed. If any window lies outside the output image after the scaler crop has been applied, it is up to the application to recalculate them. The details of how the windows are used are platform dependent. We note that when there is more than one AF window, a typical implementation might find the optimal focus position for each one and finally select the window where the focal distance for the objects shown in that part of the image are closest to the camera. [0m
+                        [33mflags[0m: [36mreadable[0m, [36mwritable[0m, [36mcontrollable[0m
+                        [36mDefault[0m: "<  >"
+                        [0mGstValueArray of GValues of type[0m [32m"GstValueArray"[0m
+  
+  [94manalogue-gain       [0m: [0mAnalogue gain value applied in the sensor device. The value of the control specifies the gain multiplier applied to all colour channels. This value cannot be lower than 1.0. This control will only take effect if AnalogueGainMode is Manual. If this control is set when AnalogueGainMode is Auto, the value will be ignored and will not be retained. When reported in metadata, this control indicates what analogue gain was used for the current request, regardless of AnalogueGainMode. AnalogueGainMode will indicate the source of the analogue gain value, whether it came from the AEGC algorithm or not. See also: exposure-time. See also: analogue-gain-mode. [0m
+                        [33mflags[0m: [36mreadable[0m, [36mwritable[0m, [36mcontrollable[0m
+                        [32mFloat[0m. [33mRange[0m: [36m  -3.402823e+38 -    3.402823e+38[0m [33mDefault[0m: [36m              0[0m 
+  
+  [94manalogue-gain-mode  [0m: [0mControls the source of the analogue gain that is applied to the image sensor. When set to Auto, the AEGC algorithm computes the analogue gain and configures the image sensor accordingly. When set to Manual, the value of the AnalogueGain control is used. When transitioning from Auto to Manual mode and no AnalogueGain control is provided by the application, the last value computed by the AEGC algorithm when the mode was Auto will be used. If the AnalogueGainMode was never set to Auto (either because the camera started in Manual mode, or Auto is not supported by the camera), the camera should use a best-effort default value. If AnalogueGainModeManual is supported, the AnalogueGain control must also be supported. For cameras where we have control over the ISP, both ExposureTimeMode and AnalogueGainMode are expected to support manual mode, and both controls (as well as ExposureTimeMode and AnalogueGain) are expected to be present. If the camera also has an AEGC implementation, both ExposureTimeMode and AnalogueGainMode shall support both manual and auto mode. If auto mode is available, it shall be the default mode. These rules do not apply to black box cameras such as UVC cameras, where the available gain and exposure modes are completely dependent on what the hardware exposes. The same procedure described for performing flickerless transitions in the ExposureTimeMode control documentation can be applied to analogue gain. See also: exposure-time-mode. See also: analogue-gain. [0m
+                        [33mflags[0m: [36mreadable[0m, [36mwritable[0m, [36mcontrollable[0m
+                        [32mEnum "AnalogueGainMode"[0m [33mDefault[0m: [36m0, "auto"[0m
+                           [33m(0)[0m: [36mauto            [0m - [0mThe analogue gain will be calculated automatically and set by the AEGC algorithm. If AnalogueGain is set while this mode is active, it will be ignored, and it will also not be retained. When transitioning from Manual to Auto mode, the AEGC should start its adjustments based on the last set manual AnalogueGain value. [0m
+                           [33m(1)[0m: [36mmanual          [0m - [0mThe analogue gain will not be updated by the AEGC algorithm. When transitioning from Auto to Manual mode, the last computed gain value is used until a new value is specified through the AnalogueGain control. If an AnalogueGain value is specified in the same request where the AnalogueGainMode is changed from Auto to Manual, the provided AnalogueGain is applied immediately. [0m
+  
+  [94mawb-enable          [0m: [0mEnable or disable the AWB. When AWB is enabled, the algorithm estimates the colour temperature of the scene and computes colour gains and the colour correction matrix automatically. The computed colour temperature, gains and correction matrix are reported in metadata. The corresponding controls are ignored if set in a request. When AWB is disabled, the colour temperature, gains and correction matrix are not updated automatically and can be set manually in requests. See also: colour-correction-matrix. See also: colour-gains. See also: colour-temperature. [0m
+                        [33mflags[0m: [36mreadable[0m, [36mwritable[0m, [36mcontrollable[0m
+                        [32mBoolean[0m. [33mDefault[0m: [36mfalse[0m
+  
+  [94mawb-mode            [0m: [0mSpecify the range of illuminants to use for the AWB algorithm. The modes supported are platform specific, and not all modes may be supported. [0m
+                        [33mflags[0m: [36mreadable[0m, [36mwritable[0m, [36mcontrollable[0m
+                        [32mEnum "AwbMode"[0m [33mDefault[0m: [36m0, "auto"[0m
+                           [33m(0)[0m: [36mauto            [0m - [0mSearch over the whole colour temperature range. [0m
+                           [33m(1)[0m: [36mincandescent    [0m - [0mIncandescent AWB lamp mode. [0m
+                           [33m(2)[0m: [36mtungsten        [0m - [0mTungsten AWB lamp mode. [0m
+                           [33m(3)[0m: [36mfluorescent     [0m - [0mFluorescent AWB lamp mode. [0m
+                           [33m(4)[0m: [36mindoor          [0m - [0mIndoor AWB lighting mode. [0m
+                           [33m(5)[0m: [36mdaylight        [0m - [0mDaylight AWB lighting mode. [0m
+                           [33m(6)[0m: [36mcloudy          [0m - [0mCloudy AWB lighting mode. [0m
+                           [33m(7)[0m: [36mcustom          [0m - [0mCustom AWB mode. [0m
+  
+  [94mbrightness          [0m: [0mSpecify a fixed brightness parameter. Positive values (up to 1.0) produce brighter images; negative values (up to -1.0) produce darker images and 0.0 leaves pixels unchanged. [0m
+                        [33mflags[0m: [36mreadable[0m, [36mwritable[0m, [36mcontrollable[0m
+                        [32mFloat[0m. [33mRange[0m: [36m  -3.402823e+38 -    3.402823e+38[0m [33mDefault[0m: [36m              0[0m 
+  
+  [94mcamera-name         [0m: [0mSelect by name which camera to use.[0m
+                        [33mflags[0m: [36mreadable[0m, [36mwritable[0m, [36mchangeable only in NULL or READY state[0m
+                        [32mString[0m. [33mDefault[0m: [36mnull[0m
+  
+  [94mcolour-correction-matrix[0m: [0mThe 3x3 matrix that converts camera RGB to sRGB within the imaging pipeline. This should describe the matrix that is used after pixels have been white-balanced, but before any gamma transformation. The 3x3 matrix is stored in conventional reading order in an array of 9 floating point values. ColourCorrectionMatrix can only be applied in a Request when the AWB is  disabled. See also: awb-enable. See also: colour-temperature. [0m
+                        [33mflags[0m: [36mreadable[0m, [36mwritable[0m, [36mcontrollable[0m
+                        [36mDefault[0m: "<  >"
+                        [0mGstValueArray of GValues of type[0m [32m"gfloat"[0m
+  
+  [94mcolour-gains        [0m: [0mPair of gain values for the Red and Blue colour channels, in that order. ColourGains can only be applied in a Request when the AWB is disabled. If ColourGains is set in a request but ColourTemperature is not, the implementation shall calculate and set the ColourTemperature based on the ColourGains. See also: awb-enable. See also: colour-temperature. [0m
+                        [33mflags[0m: [36mreadable[0m, [36mwritable[0m, [36mcontrollable[0m
+                        [36mDefault[0m: "<  >"
+                        [0mGstValueArray of GValues of type[0m [32m"gfloat"[0m
+  
+  [94mcontrast            [0m: [0mSpecify a fixed contrast parameter. Normal contrast is given by the value 1.0; larger values produce images with more contrast. [0m
+                        [33mflags[0m: [36mreadable[0m, [36mwritable[0m, [36mcontrollable[0m
+                        [32mFloat[0m. [33mRange[0m: [36m  -3.402823e+38 -    3.402823e+38[0m [33mDefault[0m: [36m              0[0m 
+  
+  [94mdigital-gain        [0m: [0mDigital gain value applied during the processing steps applied to the image as captured from the sensor. The global digital gain factor is applied to all the colour channels of the RAW image. Different pipeline models are free to specify how the global gain factor applies to each separate channel. If an imaging pipeline applies digital gain in distinct processing steps, this value indicates their total sum. Pipelines are free to decide how to adjust each processing step to respect the received gain factor and shall report their total value in the request metadata. [0m
+                        [33mflags[0m: [36mreadable[0m, [36mwritable[0m, [36mcontrollable[0m
+                        [32mFloat[0m. [33mRange[0m: [36m  -3.402823e+38 -    3.402823e+38[0m [33mDefault[0m: [36m              0[0m 
+  
+  [94mexposure-time       [0m: [0mExposure time for the frame applied in the sensor device. This value is specified in microseconds. This control will only take effect if ExposureTimeMode is Manual. If this control is set when ExposureTimeMode is Auto, the value will be ignored and will not be retained. When reported in metadata, this control indicates what exposure time was used for the current frame, regardless of ExposureTimeMode. ExposureTimeMode will indicate the source of the exposure time value, whether it came from the AE algorithm or not. See also: analogue-gain. See also: exposure-time-mode. [0m
+                        [33mflags[0m: [36mreadable[0m, [36mwritable[0m, [36mcontrollable[0m
+                        [32mInteger[0m. [33mRange[0m: [36m-2147483648 - 2147483647[0m [33mDefault[0m: [36m0[0m 
+  
+  [94mexposure-time-mode  [0m: [0mControls the source of the exposure time that is applied to the image sensor. When set to Auto, the AE algorithm computes the exposure time and configures the image sensor accordingly. When set to Manual, the value of the ExposureTime control is used. When transitioning from Auto to Manual mode and no ExposureTime control is provided by the application, the last value computed by the AE algorithm when the mode was Auto will be used. If the ExposureTimeMode was never set to Auto (either because the camera started in Manual mode, or Auto is not supported by the camera), the camera should use a best-effort default value. If ExposureTimeModeManual is supported, the ExposureTime control must also be supported. Cameras that support manual control of the sensor shall support manual mode for both ExposureTimeMode and AnalogueGainMode, and shall expose the ExposureTime and AnalogueGain controls. If the camera also has an AEGC implementation, both ExposureTimeMode and AnalogueGainMode shall support both manual and auto mode. If auto mode is available, it shall be the default mode. These rules do not apply to black box cameras such as UVC cameras, where the available gain and exposure modes are completely dependent on what the device exposes. \par Flickerless exposure mode transitions Applications that wish to transition from ExposureTimeModeAuto to direct control of the exposure time without causing extra flicker can do so by selecting an ExposureTime value as close as possible to the last value computed by the auto exposure algorithm in order to avoid any visible flickering. To select the correct value to use as ExposureTime value, applications should accommodate the natural delay in applying controls caused by the capture pipeline frame depth. When switching to manual exposure mode, applications should not immediately specify an ExposureTime value in the same request where ExposureTimeMode is set to Manual. They should instead wait for the first Request where ExposureTimeMode is reported as ExposureTimeModeManual in the Request metadata, and use the reported ExposureTime to populate the control value in the next Request to be queued to the Camera. The implementation of the auto-exposure algorithm should equally try to minimize flickering and when transitioning from manual exposure mode to auto exposure use the last value provided by the application as starting point. 1. Start with ExposureTimeMode set to Auto 2. Set ExposureTimeMode to Manual 3. Wait for the first completed request that has ExposureTimeMode set to Manual 4. Copy the value reported in ExposureTime into a new request, and submit it 5. Proceed to run manual exposure time as desired See also: exposure-time. [0m
+                        [33mflags[0m: [36mreadable[0m, [36mwritable[0m, [36mcontrollable[0m
+                        [32mEnum "ExposureTimeMode"[0m [33mDefault[0m: [36m0, "auto"[0m
+                           [33m(0)[0m: [36mauto            [0m - [0mThe exposure time will be calculated automatically and set by the AE algorithm. If ExposureTime is set while this mode is active, it will be ignored, and its value will not be retained. When transitioning from Manual to Auto mode, the AEGC should start its adjustments based on the last set manual ExposureTime value. [0m
+                           [33m(1)[0m: [36mmanual          [0m - [0mThe exposure time will not be updated by the AE algorithm. When transitioning from Auto to Manual mode, the last computed exposure value is used until a new value is specified through the ExposureTime control. If an ExposureTime value is specified in the same request where the ExposureTimeMode is changed from Auto to Manual, the provided ExposureTime is applied immediately. [0m
+  
+  [94mexposure-value      [0m: [0mSpecify an Exposure Value (EV) parameter. The EV parameter will only be applied if the AE algorithm is currently enabled, that is, at least one of AnalogueGainMode and ExposureTimeMode are in Auto mode. By convention EV adjusts the exposure as log2. For example EV = [-2, -1, -0.5, 0, 0.5, 1, 2] results in an exposure adjustment of [1/4x, 1/2x, 1/sqrt(2)x, 1x, sqrt(2)x, 2x, 4x]. See also: analogue-gain-mode. See also: exposure-time-mode. [0m
+                        [33mflags[0m: [36mreadable[0m, [36mwritable[0m, [36mcontrollable[0m
+                        [32mFloat[0m. [33mRange[0m: [36m  -3.402823e+38 -    3.402823e+38[0m [33mDefault[0m: [36m              0[0m 
+  
+  [94mgamma               [0m: [0mSpecify a fixed gamma value. The default gamma value must be 2.2 which closely mimics sRGB gamma. Note that this is camera gamma, so it is applied as 1.0/gamma. [0m
+                        [33mflags[0m: [36mreadable[0m, [36mwritable[0m, [36mcontrollable[0m
+                        [32mFloat[0m. [33mRange[0m: [36m  -3.402823e+38 -    3.402823e+38[0m [33mDefault[0m: [36m              0[0m 
+  
+  [94mlens-position       [0m: [0mSet and report the focus lens position. This control instructs the lens to move to a particular position and also reports back the position of the lens for each frame. The LensPosition control is ignored unless the AfMode is set to AfModeManual, though the value is reported back unconditionally in all modes. This value, which is generally a non-integer, is the reciprocal of the focal distance in metres, also known as dioptres. That is, to set a focal distance D, the lens position LP is given by \f$LP = \frac{1\mathrm{m}}{D}\f$ For example: - 0 moves the lens to infinity. - 0.5 moves the lens to focus on objects 2m away. - 2 moves the lens to focus on objects 50cm away. - And larger values will focus the lens closer. The default value of the control should indicate a good general position for the lens, often corresponding to the hyperfocal distance (the closest position for which objects at infinity are still acceptably sharp). The minimum will often be zero (meaning infinity), and the maximum value defines the closest focus position. Todo: Define a property to report the Hyperfocal distance of calibrated lenses. [0m
+                        [33mflags[0m: [36mreadable[0m, [36mwritable[0m, [36mcontrollable[0m
+                        [32mFloat[0m. [33mRange[0m: [36m  -3.402823e+38 -    3.402823e+38[0m [33mDefault[0m: [36m              0[0m 
+  
+  [94mname                [0m: [0mThe name of the object[0m
+                        [33mflags[0m: [36mreadable[0m, [36mwritable[0m
+                        [32mString[0m. [33mDefault[0m: [36m"libcamerasrc0"[0m
+  
+  [94mparent              [0m: [0mThe parent of the object[0m
+                        [33mflags[0m: [36mreadable[0m, [36mwritable[0m
+                        [0mObject of type[0m [32m"GstObject"[0m
+  
+  [94msaturation          [0m: [0mSpecify a fixed saturation parameter. Normal saturation is given by the value 1.0; larger values produce more saturated colours; 0.0 produces a greyscale image. [0m
+                        [33mflags[0m: [36mreadable[0m, [36mwritable[0m, [36mcontrollable[0m
+                        [32mFloat[0m. [33mRange[0m: [36m  -3.402823e+38 -    3.402823e+38[0m [33mDefault[0m: [36m              0[0m 
+  
+  [94mscaler-crop         [0m: [0mSets the image portion that will be scaled to form the whole of the final output image. The (x,y) location of this rectangle is relative to the PixelArrayActiveAreas that is being used. The units remain native sensor pixels, even if the sensor is being used in a binning or skipping mode. This control is only present when the pipeline supports scaling. Its maximum valid value is given by the properties::ScalerCropMaximum property, and the two can be used to implement digital zoom. [0m
+                        [33mflags[0m: [36mreadable[0m, [36mwritable[0m, [36mcontrollable[0m
+                        [36mDefault[0m: "<  >"
+                        [0mGstValueArray of GValues of type[0m [32m"gint"[0m
+  
+  [94msharpness           [0m: [0mIntensity of the sharpening applied to the image. A value of 0.0 means no sharpening. The minimum value means minimal sharpening, and shall be 0.0 unless the camera can't disable sharpening completely. The default value shall give a "reasonable" level of sharpening, suitable for most use cases. The maximum value may apply extremely high levels of sharpening, higher than anyone could reasonably want. Negative values are not allowed. Note also that sharpening is not applied to raw streams. [0m
+                        [33mflags[0m: [36mreadable[0m, [36mwritable[0m, [36mcontrollable[0m
+                        [32mFloat[0m. [33mRange[0m: [36m  -3.402823e+38 -    3.402823e+38[0m [33mDefault[0m: [36m              0[0m 
+  

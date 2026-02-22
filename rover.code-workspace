@@ -1,0 +1,19 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"terminal.integrated.profiles.linux": {
+			"bash": {
+				"path": "bash",
+				"args": ["--init-file", "/home/pi/rover_ws/ros_entrypoint.sh"]
+			}
+		},
+		"workbench.colorCustomizations": {
+			"titleBar.activeBackground": "#116378",
+			"titleBar.activeForeground": "#ffffff" 
+		}
+	}
+}
