@@ -18,7 +18,7 @@
 #define BW   500.0  // Bandwidth (kHz)
 #define SF   7      // Spreading Factor (lower -> faster)
 #define CR   5      // Coding Rate
-#define STICK_THRESH 0.3  // threshold for detecting movement
+#define STICK_THRESH 0.3  // Threshold for detecting movement
 
 // Battery Monitor Settings ====================
 const int BAT_PIN = 2;  // GPIO 2 (ADC1_CH1)
@@ -198,9 +198,9 @@ void checkBatteryHealth(float voltage) {
       // 2. Alert on OLED
       display.clear();
       display.setFont(ArialMT_Plain_16);
-      display.drawString(0, 0, "!!! CRITICAL BAT !!!");
+      display.drawString(0, 0, "LOW BATTERY");
       display.drawString(0, 20, "Voltage: " + String(voltage, 2) + "V");
-      display.drawString(0, 40, "Shutting Down Pi...");
+      display.drawString(0, 40, "Shutting Down Pi");
       display.display();
       
       // 3. Alert on LED (Red strobe effect via brightness if standard led)
