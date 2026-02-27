@@ -1,8 +1,17 @@
+# ROS2 build artifacts
 build/
 install/
 log/
-*.pyc
+
+# Python artifacts
 __pycache__/
+*.pyc
+
+# VS Code artifacts
 .vscode/
 *.swp
 *.tar.gz
+
+# Data & Logs (Avoid pushing large sensor data)
+*.bag
+*.mcap
