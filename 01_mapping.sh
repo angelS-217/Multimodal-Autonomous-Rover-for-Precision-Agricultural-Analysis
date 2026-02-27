@@ -47,7 +47,7 @@ ros2 run slam_toolbox async_slam_toolbox_node --ros-args -p use_sim_time:=false 
 
 echo "=============================================================================="
 echo "✅ All Phase 1 systems (including Telemetry) are running!"
-echo "📡 Foxglove is ready. Connect your laptop to ws://<PI_IP_ADDRESS>:8765"
+echo "📡 Foxglove is ready. Connect the base station to ws://<PI_IP_ADDRESS>:8765"
 echo "🎮 ACTION REQUIRED: Use the gamepad to drive the rover around the test environment."
 echo "🛑 Press [Ctrl+C] at any time to stop mapping."
 echo "=============================================================================="
