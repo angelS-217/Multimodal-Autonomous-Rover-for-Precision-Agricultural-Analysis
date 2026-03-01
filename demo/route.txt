@@ -1,0 +1,7 @@
+# Main Greenhouse Patrol Route
+# Format: X, Y
+
+1.0, 0.0    # Plant 1 
+1.5, 0.5    # Plant 2 
+1.5, -0.5   # Plant 3 
+0.0, 0.0    # Return to base
