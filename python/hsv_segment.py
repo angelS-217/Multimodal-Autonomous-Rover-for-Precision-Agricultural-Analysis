@@ -14,8 +14,8 @@ import numpy as np
 from pathlib import Path
 import matplotlib.pyplot as plt
 
-from google.colab import drive
-drive.mount('/content/drive')
+# from google.colab import drive
+# drive.mount('/content/drive')
 
 """## 1. Load Image"""
 
