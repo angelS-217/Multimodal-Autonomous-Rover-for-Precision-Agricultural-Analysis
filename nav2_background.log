@@ -1,0 +1,276 @@
+[INFO] [launch]: All log files can be found below /home/rover/.ros/log/2026-03-10-01-37-23-069573-rover-38691
+[INFO] [launch]: Default logging verbosity is set to INFO
+[INFO] [component_container_isolated-1]: process started with pid [38830]
+[component_container_isolated-1] [INFO] [1773131844.215624040] [nav2_container]: Load Library: /home/rover/yes/envs/ros_env/lib/libmap_server_core.so
+[component_container_isolated-1] [INFO] [1773131844.227002013] [nav2_container]: Found class: rclcpp_components::NodeFactoryTemplate<nav2_map_server::CostmapFilterInfoServer>
+[component_container_isolated-1] [INFO] [1773131844.227061457] [nav2_container]: Found class: rclcpp_components::NodeFactoryTemplate<nav2_map_server::MapSaver>
+[component_container_isolated-1] [INFO] [1773131844.227071364] [nav2_container]: Found class: rclcpp_components::NodeFactoryTemplate<nav2_map_server::MapServer>
+[component_container_isolated-1] [INFO] [1773131844.227078827] [nav2_container]: Instantiate class: rclcpp_components::NodeFactoryTemplate<nav2_map_server::MapServer>
+[component_container_isolated-1] [INFO] [1773131844.241571214] [map_server]: 
+[component_container_isolated-1] 	map_server lifecycle node launched. 
+[INFO] [launch_ros.actions.load_composable_nodes]: Loaded node '/map_server' in container '/nav2_container'
+[component_container_isolated-1] 	Waiting on external lifecycle transitions to activate
+[component_container_isolated-1] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[component_container_isolated-1] [INFO] [1773131844.242655913] [map_server]: Creating
+[component_container_isolated-1] [INFO] [1773131844.246999655] [nav2_container]: Load Library: /home/rover/yes/envs/ros_env/lib/libamcl_core.so
+[component_container_isolated-1] [INFO] [1773131844.250190531] [nav2_container]: Found class: rclcpp_components::NodeFactoryTemplate<nav2_amcl::AmclNode>
+[component_container_isolated-1] [INFO] [1773131844.250241827] [nav2_container]: Instantiate class: rclcpp_components::NodeFactoryTemplate<nav2_amcl::AmclNode>
+[component_container_isolated-1] [INFO] [1773131844.268941382] [amcl]: 
+[component_container_isolated-1] 	amcl lifecycle node launched. 
+[component_container_isolated-1] 	Waiting on external lifecycle transitions to activate
+[component_container_isolated-1] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[component_container_isolated-1] [INFO] [1773131844.269353547] [amcl]: Creating
+[INFO] [launch_ros.actions.load_composable_nodes]: Loaded node '/amcl' in container '/nav2_container'
+[component_container_isolated-1] [INFO] [1773131844.278231511] [nav2_container]: Load Library: /home/rover/yes/envs/ros_env/lib/libnav2_lifecycle_manager_core.so
+[component_container_isolated-1] [INFO] [1773131844.279130267] [nav2_container]: Found class: rclcpp_components::NodeFactoryTemplate<nav2_lifecycle_manager::LifecycleManager>
+[component_container_isolated-1] [INFO] [1773131844.279164230] [nav2_container]: Instantiate class: rclcpp_components::NodeFactoryTemplate<nav2_lifecycle_manager::LifecycleManager>
+[component_container_isolated-1] [INFO] [1773131844.293933911] [lifecycle_manager_localization]: Creating
+[component_container_isolated-1] [INFO] [1773131844.298164302] [lifecycle_manager_localization]: [34m[1mCreating and initializing lifecycle service clients[0m[0m
+[component_container_isolated-1] [INFO] [1773131844.303253281] [nav2_container]: Load Library: /home/rover/yes/envs/ros_env/lib/libcontroller_server_core.so
+[INFO] [launch_ros.actions.load_composable_nodes]: Loaded node '/lifecycle_manager_localization' in container '/nav2_container'
+[component_container_isolated-1] [INFO] [1773131844.306950748] [nav2_container]: Found class: rclcpp_components::NodeFactoryTemplate<nav2_controller::ControllerServer>
+[component_container_isolated-1] [INFO] [1773131844.307002785] [nav2_container]: Instantiate class: rclcpp_components::NodeFactoryTemplate<nav2_controller::ControllerServer>
+[component_container_isolated-1] [INFO] [1773131844.307144136] [lifecycle_manager_localization]: [34m[1mStarting managed nodes bringup...[0m[0m
+[component_container_isolated-1] [INFO] [1773131844.308842518] [lifecycle_manager_localization]: [34m[1mConfiguring map_server[0m[0m
+[component_container_isolated-1] [INFO] [1773131844.309887625] [map_server]: Configuring
+[component_container_isolated-1] [INFO] [1773131844.309962069] [map_io]: Loading yaml file: /home/rover/ros2_ws/maps/field_map.yaml
+[component_container_isolated-1] [INFO] [1773131844.310235531] [map_io]: resolution: 0.05
+[component_container_isolated-1] [INFO] [1773131844.310253327] [map_io]: origin[0]: -0.634
+[component_container_isolated-1] [INFO] [1773131844.310259346] [map_io]: origin[1]: -0.637
+[component_container_isolated-1] [INFO] [1773131844.310264161] [map_io]: origin[2]: 0
+[component_container_isolated-1] [INFO] [1773131844.310269253] [map_io]: free_thresh: 0.25
+[component_container_isolated-1] [INFO] [1773131844.310274660] [map_io]: occupied_thresh: 0.65
+[component_container_isolated-1] [INFO] [1773131844.310281531] [map_io]: mode: trinary
+[component_container_isolated-1] [INFO] [1773131844.310286975] [map_io]: negate: 0
+[component_container_isolated-1] [INFO] [1773131844.310479789] [map_io]: Loading image_file: /home/rover/ros2_ws/maps/field_map.pgm
+[component_container_isolated-1] [INFO] [1773131844.311771377] [map_io]: Read map /home/rover/ros2_ws/maps/field_map.pgm: 102 X 81 map @ 0.05 m/cell
+[component_container_isolated-1] [INFO] [1773131844.317119874] [controller_server]: 
+[component_container_isolated-1] 	controller_server lifecycle node launched. 
+[component_container_isolated-1] 	Waiting on external lifecycle transitions to activate
+[component_container_isolated-1] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[component_container_isolated-1] [INFO] [1773131844.327536369] [lifecycle_manager_localization]: [34m[1mConfiguring amcl[0m[0m
+[component_container_isolated-1] [INFO] [1773131844.327839164] [amcl]: Configuring
+[component_container_isolated-1] [INFO] [1773131844.327923423] [amcl]: initTransforms
+[component_container_isolated-1] [INFO] [1773131844.329254973] [controller_server]: Creating controller server
+[component_container_isolated-1] [INFO] [1773131844.340293670] [local_costmap.local_costmap]: 
+[component_container_isolated-1] 	local_costmap lifecycle node launched. 
+[INFO] [launch_ros.actions.load_composable_nodes]: Loaded node '/controller_server' in container '/nav2_container'
+[component_container_isolated-1] 	Waiting on external lifecycle transitions to activate
+[component_container_isolated-1] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[component_container_isolated-1] [INFO] [1773131844.340837742] [local_costmap.local_costmap]: Creating Costmap
+[component_container_isolated-1] [INFO] [1773131844.355251295] [nav2_container]: Load Library: /home/rover/yes/envs/ros_env/lib/libsmoother_server_core.so
+[component_container_isolated-1] [INFO] [1773131844.357430194] [nav2_container]: Found class: rclcpp_components::NodeFactoryTemplate<nav2_smoother::SmootherServer>
+[component_container_isolated-1] [INFO] [1773131844.357472823] [nav2_container]: Instantiate class: rclcpp_components::NodeFactoryTemplate<nav2_smoother::SmootherServer>
+[component_container_isolated-1] [INFO] [1773131844.360885791] [amcl]: initPubSub
+[component_container_isolated-1] [INFO] [1773131844.375058697] [amcl]: Subscribed to map topic.
+[component_container_isolated-1] [INFO] [1773131844.379114181] [smoother_server]: 
+[component_container_isolated-1] 	smoother_server lifecycle node launched. 
+[component_container_isolated-1] 	Waiting on external lifecycle transitions to activate
+[component_container_isolated-1] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[component_container_isolated-1] [INFO] [1773131844.381763374] [smoother_server]: Creating smoother server
+[component_container_isolated-1] [INFO] [1773131844.384422197] [lifecycle_manager_localization]: [34m[1mActivating map_server[0m[0m
+[component_container_isolated-1] [INFO] [1773131844.384671584] [map_server]: Activating
+[component_container_isolated-1] [INFO] [1773131844.384794769] [map_server]: Creating bond (map_server) to lifecycle manager.
+[INFO] [launch_ros.actions.load_composable_nodes]: Loaded node '/smoother_server' in container '/nav2_container'
+[component_container_isolated-1] [INFO] [1773131844.384819547] [amcl]: Received a 102 X 81 map @ 0.050 m/pix
+[component_container_isolated-1] [INFO] [1773131844.394134732] [nav2_container]: Load Library: /home/rover/yes/envs/ros_env/lib/libplanner_server_core.so
+[component_container_isolated-1] [INFO] [1773131844.395405041] [nav2_container]: Found class: rclcpp_components::NodeFactoryTemplate<nav2_planner::PlannerServer>
+[component_container_isolated-1] [INFO] [1773131844.395459726] [nav2_container]: Instantiate class: rclcpp_components::NodeFactoryTemplate<nav2_planner::PlannerServer>
+[component_container_isolated-1] [INFO] [1773131844.407614455] [planner_server]: 
+[component_container_isolated-1] 	planner_server lifecycle node launched. 
+[component_container_isolated-1] 	Waiting on external lifecycle transitions to activate
+[component_container_isolated-1] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[component_container_isolated-1] [INFO] [1773131844.410347074] [planner_server]: Creating
+[component_container_isolated-1] [INFO] [1773131844.432049413] [global_costmap.global_costmap]: 
+[component_container_isolated-1] 	global_costmap lifecycle node launched. 
+[component_container_isolated-1] 	Waiting on external lifecycle transitions to activate
+[component_container_isolated-1] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[INFO] [launch_ros.actions.load_composable_nodes]: Loaded node '/planner_server' in container '/nav2_container'
+[component_container_isolated-1] [INFO] [1773131844.432571818] [global_costmap.global_costmap]: Creating Costmap
+[component_container_isolated-1] [INFO] [1773131844.439070885] [nav2_container]: Load Library: /home/rover/yes/envs/ros_env/lib/libbehavior_server_core.so
+[component_container_isolated-1] [INFO] [1773131844.443579219] [nav2_container]: Found class: rclcpp_components::NodeFactoryTemplate<behavior_server::BehaviorServer>
+[component_container_isolated-1] [INFO] [1773131844.443632089] [nav2_container]: Instantiate class: rclcpp_components::NodeFactoryTemplate<behavior_server::BehaviorServer>
+[component_container_isolated-1] [INFO] [1773131844.458839139] [behavior_server]: 
+[component_container_isolated-1] 	behavior_server lifecycle node launched. 
+[component_container_isolated-1] 	Waiting on external lifecycle transitions to activate
+[component_container_isolated-1] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[INFO] [launch_ros.actions.load_composable_nodes]: Loaded node '/behavior_server' in container '/nav2_container'
+[component_container_isolated-1] [INFO] [1773131844.466137258] [nav2_container]: Load Library: /home/rover/yes/envs/ros_env/lib/libbt_navigator_core.so
+[component_container_isolated-1] [INFO] [1773131844.468060769] [nav2_container]: Found class: rclcpp_components::NodeFactoryTemplate<nav2_bt_navigator::BtNavigator>
+[component_container_isolated-1] [INFO] [1773131844.468105398] [nav2_container]: Instantiate class: rclcpp_components::NodeFactoryTemplate<nav2_bt_navigator::BtNavigator>
+[component_container_isolated-1] [INFO] [1773131844.481208846] [bt_navigator]: 
+[component_container_isolated-1] 	bt_navigator lifecycle node launched. 
+[component_container_isolated-1] 	Waiting on external lifecycle transitions to activate
+[component_container_isolated-1] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[INFO] [launch_ros.actions.load_composable_nodes]: Loaded node '/bt_navigator' in container '/nav2_container'
+[component_container_isolated-1] [INFO] [1773131844.481296660] [bt_navigator]: Creating
+[component_container_isolated-1] [INFO] [1773131844.491692322] [nav2_container]: Load Library: /home/rover/yes/envs/ros_env/lib/libwaypoint_follower_core.so
+[component_container_isolated-1] [INFO] [1773131844.492744225] [nav2_container]: Found class: rclcpp_components::NodeFactoryTemplate<nav2_waypoint_follower::WaypointFollower>
+[component_container_isolated-1] [INFO] [1773131844.492792503] [nav2_container]: Instantiate class: rclcpp_components::NodeFactoryTemplate<nav2_waypoint_follower::WaypointFollower>
+[component_container_isolated-1] [INFO] [1773131844.493361352] [lifecycle_manager_localization]: Server map_server connected with bond.
+[INFO] [launch_ros.actions.load_composable_nodes]: Loaded node '/waypoint_follower' in container '/nav2_container'
+[component_container_isolated-1] [INFO] [1773131844.494382330] [lifecycle_manager_localization]: [34m[1mActivating amcl[0m[0m
+[component_container_isolated-1] [INFO] [1773131844.495234641] [amcl]: Activating
+[component_container_isolated-1] [INFO] [1773131844.495298345] [amcl]: Creating bond (amcl) to lifecycle manager.
+[component_container_isolated-1] [INFO] [1773131844.506415856] [waypoint_follower]: 
+[component_container_isolated-1] 	waypoint_follower lifecycle node launched. 
+[component_container_isolated-1] 	Waiting on external lifecycle transitions to activate
+[component_container_isolated-1] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[component_container_isolated-1] [INFO] [1773131844.507210593] [waypoint_follower]: Creating
+[component_container_isolated-1] [INFO] [1773131844.516203891] [nav2_container]: Load Library: /home/rover/yes/envs/ros_env/lib/libvelocity_smoother_core.so
+[component_container_isolated-1] [INFO] [1773131844.519079509] [nav2_container]: Found class: rclcpp_components::NodeFactoryTemplate<nav2_velocity_smoother::VelocitySmoother>
+[component_container_isolated-1] [INFO] [1773131844.519142897] [nav2_container]: Instantiate class: rclcpp_components::NodeFactoryTemplate<nav2_velocity_smoother::VelocitySmoother>
+[component_container_isolated-1] [INFO] [1773131844.535446647] [velocity_smoother]: 
+[component_container_isolated-1] 	velocity_smoother lifecycle node launched. 
+[component_container_isolated-1] 	Waiting on external lifecycle transitions to activate
+[component_container_isolated-1] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[INFO] [launch_ros.actions.load_composable_nodes]: Loaded node '/velocity_smoother' in container '/nav2_container'
+[component_container_isolated-1] [INFO] [1773131844.540074110] [nav2_container]: Found class: rclcpp_components::NodeFactoryTemplate<nav2_lifecycle_manager::LifecycleManager>
+[component_container_isolated-1] [INFO] [1773131844.540118832] [nav2_container]: Instantiate class: rclcpp_components::NodeFactoryTemplate<nav2_lifecycle_manager::LifecycleManager>
+[component_container_isolated-1] [INFO] [1773131844.552965428] [lifecycle_manager_navigation]: Creating
+[INFO] [launch_ros.actions.load_composable_nodes]: Loaded node '/lifecycle_manager_navigation' in container '/nav2_container'
+[component_container_isolated-1] [INFO] [1773131844.555788713] [lifecycle_manager_navigation]: [34m[1mCreating and initializing lifecycle service clients[0m[0m
+[component_container_isolated-1] [INFO] [1773131844.567133964] [lifecycle_manager_navigation]: [34m[1mStarting managed nodes bringup...[0m[0m
+[component_container_isolated-1] [INFO] [1773131844.567219519] [lifecycle_manager_navigation]: [34m[1mConfiguring controller_server[0m[0m
+[component_container_isolated-1] [INFO] [1773131844.567603981] [controller_server]: Configuring controller interface
+[component_container_isolated-1] [INFO] [1773131844.568087479] [controller_server]: getting goal checker plugins..
+[component_container_isolated-1] [INFO] [1773131844.569112752] [controller_server]: Controller frequency set to 20.0000Hz
+[component_container_isolated-1] [INFO] [1773131844.569194289] [local_costmap.local_costmap]: Configuring
+[component_container_isolated-1] [INFO] [1773131844.574954785] [local_costmap.local_costmap]: Using plugin "voxel_layer"
+[component_container_isolated-1] [INFO] [1773131844.581025316] [local_costmap.local_costmap]: Subscribed to Topics: scan
+[component_container_isolated-1] [INFO] [1773131844.589568782] [local_costmap.local_costmap]: Initialized plugin "voxel_layer"
+[component_container_isolated-1] [INFO] [1773131844.589630337] [local_costmap.local_costmap]: Using plugin "inflation_layer"
+[component_container_isolated-1] [INFO] [1773131844.591273830] [local_costmap.local_costmap]: Initialized plugin "inflation_layer"
+[component_container_isolated-1] [INFO] [1773131844.602203953] [controller_server]: Created progress_checker : progress_checker of type nav2_controller::SimpleProgressChecker
+[component_container_isolated-1] [INFO] [1773131844.603949002] [controller_server]: Created goal checker : general_goal_checker of type nav2_controller::SimpleGoalChecker
+[component_container_isolated-1] [INFO] [1773131844.604956868] [controller_server]: Controller Server has general_goal_checker goal checkers available.
+[component_container_isolated-1] [INFO] [1773131844.607683394] [controller_server]: Created controller : FollowPath of type dwb_core::DWBLocalPlanner
+[component_container_isolated-1] [INFO] [1773131844.610306902] [lifecycle_manager_localization]: Server amcl connected with bond.
+[component_container_isolated-1] [INFO] [1773131844.610361013] [lifecycle_manager_localization]: [34m[1mManaged nodes are active[0m[0m
+[component_container_isolated-1] [INFO] [1773131844.610378476] [lifecycle_manager_localization]: [34m[1mCreating bond timer...[0m[0m
+[component_container_isolated-1] [INFO] [1773131844.611704248] [controller_server]: Setting transform_tolerance to 0.200000
+[component_container_isolated-1] [INFO] [1773131844.628201367] [controller_server]: Using critic "RotateToGoal" (dwb_critics::RotateToGoalCritic)
+[component_container_isolated-1] [INFO] [1773131844.629318641] [controller_server]: Critic plugin initialized
+[component_container_isolated-1] [INFO] [1773131844.629584862] [controller_server]: Using critic "Oscillation" (dwb_critics::OscillationCritic)
+[component_container_isolated-1] [INFO] [1773131844.630920005] [controller_server]: Critic plugin initialized
+[component_container_isolated-1] [INFO] [1773131844.631199244] [controller_server]: Using critic "BaseObstacle" (dwb_critics::BaseObstacleCritic)
+[component_container_isolated-1] [INFO] [1773131844.631582076] [controller_server]: Critic plugin initialized
+[component_container_isolated-1] [INFO] [1773131844.631807297] [controller_server]: Using critic "GoalAlign" (dwb_critics::GoalAlignCritic)
+[component_container_isolated-1] [INFO] [1773131844.633912900] [controller_server]: Critic plugin initialized
+[component_container_isolated-1] [INFO] [1773131844.634191973] [controller_server]: Using critic "PathAlign" (dwb_critics::PathAlignCritic)
+[component_container_isolated-1] [INFO] [1773131844.635037192] [controller_server]: Critic plugin initialized
+[component_container_isolated-1] [INFO] [1773131844.635298876] [controller_server]: Using critic "PathDist" (dwb_critics::PathDistCritic)
+[component_container_isolated-1] [INFO] [1773131844.635789374] [controller_server]: Critic plugin initialized
+[component_container_isolated-1] [INFO] [1773131844.636064891] [controller_server]: Using critic "GoalDist" (dwb_critics::GoalDistCritic)
+[component_container_isolated-1] [INFO] [1773131844.636577889] [controller_server]: Critic plugin initialized
+[component_container_isolated-1] [INFO] [1773131844.636617149] [controller_server]: Controller Server has FollowPath controllers available.
+[component_container_isolated-1] [INFO] [1773131844.646973848] [lifecycle_manager_navigation]: [34m[1mConfiguring smoother_server[0m[0m
+[component_container_isolated-1] [INFO] [1773131844.647398124] [smoother_server]: Configuring smoother server
+[component_container_isolated-1] [INFO] [1773131844.656788382] [smoother_server]: Created smoother : simple_smoother of type nav2_smoother::SimpleSmoother
+[component_container_isolated-1] [INFO] [1773131844.658230654] [smoother_server]: Smoother Server has simple_smoother  smoothers available.
+[component_container_isolated-1] [INFO] [1773131844.666170882] [lifecycle_manager_navigation]: [34m[1mConfiguring planner_server[0m[0m
+[component_container_isolated-1] [INFO] [1773131844.667197285] [planner_server]: Configuring
+[component_container_isolated-1] [INFO] [1773131844.667260378] [global_costmap.global_costmap]: Configuring
+[component_container_isolated-1] [INFO] [1773131844.678605795] [global_costmap.global_costmap]: Using plugin "static_layer"
+[component_container_isolated-1] [INFO] [1773131844.682532039] [global_costmap.global_costmap]: Subscribing to the map topic (/map) with transient local durability
+[component_container_isolated-1] [INFO] [1773131844.683810052] [global_costmap.global_costmap]: Initialized plugin "static_layer"
+[component_container_isolated-1] [INFO] [1773131844.683879792] [global_costmap.global_costmap]: Using plugin "obstacle_layer"
+[component_container_isolated-1] [INFO] [1773131844.687863406] [global_costmap.global_costmap]: Subscribed to Topics: scan
+[component_container_isolated-1] [INFO] [1773131844.696175910] [global_costmap.global_costmap]: Initialized plugin "obstacle_layer"
+[component_container_isolated-1] [INFO] [1773131844.696248780] [global_costmap.global_costmap]: Using plugin "inflation_layer"
+[component_container_isolated-1] [INFO] [1773131844.697721311] [global_costmap.global_costmap]: Initialized plugin "inflation_layer"
+[component_container_isolated-1] [INFO] [1773131844.711548070] [global_costmap.global_costmap]: StaticLayer: Resizing costmap to 102 X 81 at 0.050000 m/pix
+[component_container_isolated-1] [INFO] [1773131844.712418882] [planner_server]: Created global planner plugin GridBased of type nav2_navfn_planner/NavfnPlanner
+[component_container_isolated-1] [INFO] [1773131844.712458011] [planner_server]: Configuring plugin GridBased of type NavfnPlanner
+[component_container_isolated-1] [INFO] [1773131844.714786224] [planner_server]: Planner Server has GridBased planners available.
+[component_container_isolated-1] [INFO] [1773131844.733691519] [lifecycle_manager_navigation]: [34m[1mConfiguring behavior_server[0m[0m
+[component_container_isolated-1] [INFO] [1773131844.733856518] [behavior_server]: Configuring
+[component_container_isolated-1] [INFO] [1773131844.744221199] [behavior_server]: Creating behavior plugin spin of type nav2_behaviors/Spin
+[component_container_isolated-1] [INFO] [1773131844.745842303] [behavior_server]: Configuring spin
+[component_container_isolated-1] [INFO] [1773131844.761781943] [behavior_server]: Creating behavior plugin backup of type nav2_behaviors/BackUp
+[component_container_isolated-1] [INFO] [1773131844.763445085] [behavior_server]: Configuring backup
+[component_container_isolated-1] [INFO] [1773131844.773848987] [behavior_server]: Creating behavior plugin drive_on_heading of type nav2_behaviors/DriveOnHeading
+[component_container_isolated-1] [INFO] [1773131844.775805146] [behavior_server]: Configuring drive_on_heading
+[component_container_isolated-1] [INFO] [1773131844.793435649] [behavior_server]: Creating behavior plugin assisted_teleop of type nav2_behaviors/AssistedTeleop
+[component_container_isolated-1] [INFO] [1773131844.795045754] [behavior_server]: Configuring assisted_teleop
+[component_container_isolated-1] [INFO] [1773131844.806440208] [behavior_server]: Creating behavior plugin wait of type nav2_behaviors/Wait
+[component_container_isolated-1] [INFO] [1773131844.808707088] [behavior_server]: Configuring wait
+[component_container_isolated-1] [INFO] [1773131844.817633015] [lifecycle_manager_navigation]: [34m[1mConfiguring bt_navigator[0m[0m
+[component_container_isolated-1] [INFO] [1773131844.818080180] [bt_navigator]: Configuring
+[component_container_isolated-1] [INFO] [1773131844.927574334] [lifecycle_manager_navigation]: [34m[1mConfiguring waypoint_follower[0m[0m
+[component_container_isolated-1] [INFO] [1773131844.928296646] [waypoint_follower]: Configuring
+[component_container_isolated-1] [INFO] [1773131844.946859460] [waypoint_follower]: Created waypoint_task_executor : wait_at_waypoint of type nav2_waypoint_follower::WaitAtWaypoint
+[component_container_isolated-1] [INFO] [1773131844.948569268] [lifecycle_manager_navigation]: [34m[1mConfiguring velocity_smoother[0m[0m
+[component_container_isolated-1] [INFO] [1773131844.948790712] [velocity_smoother]: Configuring velocity smoother
+[component_container_isolated-1] [INFO] [1773131844.953520267] [lifecycle_manager_navigation]: [34m[1mActivating controller_server[0m[0m
+[component_container_isolated-1] [INFO] [1773131844.954096117] [controller_server]: Activating
+[component_container_isolated-1] [INFO] [1773131844.954155005] [local_costmap.local_costmap]: Activating
+[component_container_isolated-1] [INFO] [1773131844.954175635] [local_costmap.local_costmap]: Checking transform
+[component_container_isolated-1] [INFO] [1773131844.954193246] [local_costmap.local_costmap]: Timed out waiting for transform from base_link to odom to become available, tf error: Invalid frame ID "odom" passed to canTransform argument target_frame - frame does not exist
+[component_container_isolated-1] [INFO] [1773131845.390277703] [amcl]: Message Filter dropping message: frame 'base_laser' at time 1773131844.390 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[component_container_isolated-1] [INFO] [1773131845.454262391] [local_costmap.local_costmap]: Timed out waiting for transform from base_link to odom to become available, tf error: Invalid frame ID "odom" passed to canTransform argument target_frame - frame does not exist
+[component_container_isolated-1] [INFO] [1773131845.490008822] [amcl]: Message Filter dropping message: frame 'base_laser' at time 1773131844.490 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[component_container_isolated-1] [INFO] [1773131845.592581763] [amcl]: Message Filter dropping message: frame 'base_laser' at time 1773131844.591 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[component_container_isolated-1] [INFO] [1773131845.789846843] [amcl]: Message Filter dropping message: frame 'base_laser' at time 1773131844.790 for reason 'discarding message because the queue is full'
+[component_container_isolated-1] [INFO] [1773131845.889844202] [amcl]: Message Filter dropping message: frame 'base_laser' at time 1773131844.890 for reason 'discarding message because the queue is full'
+[component_container_isolated-1] [INFO] [1773131845.954259685] [local_costmap.local_costmap]: Timed out waiting for transform from base_link to odom to become available, tf error: Invalid frame ID "odom" passed to canTransform argument target_frame - frame does not exist
+[component_container_isolated-1] [INFO] [1773131845.989787987] [amcl]: Message Filter dropping message: frame 'base_laser' at time 1773131844.990 for reason 'discarding message because the queue is full'
+[component_container_isolated-1] [INFO] [1773131846.089776939] [amcl]: Message Filter dropping message: frame 'base_laser' at time 1773131845.090 for reason 'discarding message because the queue is full'
+[component_container_isolated-1] [INFO] [1773131846.189759742] [amcl]: Message Filter dropping message: frame 'base_laser' at time 1773131845.190 for reason 'discarding message because the queue is full'
+[component_container_isolated-1] [INFO] [1773131846.289797212] [amcl]: Message Filter dropping message: frame 'base_laser' at time 1773131845.290 for reason 'discarding message because the queue is full'
+[component_container_isolated-1] [INFO] [1773131846.389792108] [amcl]: Message Filter dropping message: frame 'base_laser' at time 1773131845.390 for reason 'discarding message because the queue is full'
+[component_container_isolated-1] [INFO] [1773131846.454258480] [local_costmap.local_costmap]: Timed out waiting for transform from base_link to odom to become available, tf error: Invalid frame ID "odom" passed to canTransform argument target_frame - frame does not exist
+[component_container_isolated-1] [INFO] [1773131846.489784856] [amcl]: Message Filter dropping message: frame 'base_laser' at time 1773131845.490 for reason 'discarding message because the queue is full'
+[component_container_isolated-1] [INFO] [1773131846.589782771] [amcl]: Message Filter dropping message: frame 'base_laser' at time 1773131845.590 for reason 'discarding message because the queue is full'
+[component_container_isolated-1] [INFO] [1773131846.689791408] [amcl]: Message Filter dropping message: frame 'base_laser' at time 1773131845.690 for reason 'discarding message because the queue is full'
+[component_container_isolated-1] [INFO] [1773131846.789847674] [amcl]: Message Filter dropping message: frame 'base_laser' at time 1773131845.790 for reason 'discarding message because the queue is full'
+[component_container_isolated-1] [INFO] [1773131846.889855126] [amcl]: Message Filter dropping message: frame 'base_laser' at time 1773131845.890 for reason 'discarding message because the queue is full'
+[component_container_isolated-1] [INFO] [1773131846.954259757] [local_costmap.local_costmap]: Timed out waiting for transform from base_link to odom to become available, tf error: Invalid frame ID "odom" passed to canTransform argument target_frame - frame does not exist
+[component_container_isolated-1] [INFO] [1773131846.989908855] [amcl]: Message Filter dropping message: frame 'base_laser' at time 1773131845.990 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[component_container_isolated-1] [INFO] [1773131847.090931137] [amcl]: Message Filter dropping message: frame 'base_laser' at time 1773131846.090 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[component_container_isolated-1] [INFO] [1773131847.190063370] [amcl]: Message Filter dropping message: frame 'base_laser' at time 1773131846.190 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[component_container_isolated-1] [INFO] [1773131847.289927934] [amcl]: Message Filter dropping message: frame 'base_laser' at time 1773131846.290 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[component_container_isolated-1] [INFO] [1773131847.389843090] [amcl]: Message Filter dropping message: frame 'base_laser' at time 1773131846.390 for reason 'discarding message because the queue is full'
+[component_container_isolated-1] [INFO] [1773131847.454277443] [local_costmap.local_costmap]: Timed out waiting for transform from base_link to odom to become available, tf error: Invalid frame ID "odom" passed to canTransform argument target_frame - frame does not exist
+[component_container_isolated-1] [INFO] [1773131847.489823986] [amcl]: Message Filter dropping message: frame 'base_laser' at time 1773131846.490 for reason 'discarding message because the queue is full'
+[component_container_isolated-1] [INFO] [1773131847.589809068] [amcl]: Message Filter dropping message: frame 'base_laser' at time 1773131846.590 for reason 'discarding message because the queue is full'
+[component_container_isolated-1] [INFO] [1773131847.689813465] [amcl]: Message Filter dropping message: frame 'base_laser' at time 1773131846.690 for reason 'discarding message because the queue is full'
+[component_container_isolated-1] [INFO] [1773131847.789814213] [amcl]: Message Filter dropping message: frame 'base_laser' at time 1773131846.790 for reason 'discarding message because the queue is full'
+[component_container_isolated-1] [INFO] [1773131847.889847406] [amcl]: Message Filter dropping message: frame 'base_laser' at time 1773131846.890 for reason 'discarding message because the queue is full'
+[component_container_isolated-1] [INFO] [1773131847.954259445] [local_costmap.local_costmap]: Timed out waiting for transform from base_link to odom to become available, tf error: Invalid frame ID "odom" passed to canTransform argument target_frame - frame does not exist
+[component_container_isolated-1] [INFO] [1773131847.989794914] [amcl]: Message Filter dropping message: frame 'base_laser' at time 1773131846.990 for reason 'discarding message because the queue is full'
+[component_container_isolated-1] [INFO] [1773131848.089805144] [amcl]: Message Filter dropping message: frame 'base_laser' at time 1773131847.090 for reason 'discarding message because the queue is full'
+[component_container_isolated-1] [INFO] [1773131848.189841855] [amcl]: Message Filter dropping message: frame 'base_laser' at time 1773131847.190 for reason 'discarding message because the queue is full'
+[component_container_isolated-1] [INFO] [1773131848.289782290] [amcl]: Message Filter dropping message: frame 'base_laser' at time 1773131847.290 for reason 'discarding message because the queue is full'
+[component_container_isolated-1] [INFO] [1773131848.389805427] [amcl]: Message Filter dropping message: frame 'base_laser' at time 1773131847.390 for reason 'discarding message because the queue is full'
+[component_container_isolated-1] [INFO] [1773131848.454260059] [local_costmap.local_costmap]: Timed out waiting for transform from base_link to odom to become available, tf error: Invalid frame ID "odom" passed to canTransform argument target_frame - frame does not exist
+[component_container_isolated-1] [INFO] [1773131848.489825120] [amcl]: Message Filter dropping message: frame 'base_laser' at time 1773131847.490 for reason 'discarding message because the queue is full'
+[component_container_isolated-1] [INFO] [1773131848.589823443] [amcl]: Message Filter dropping message: frame 'base_laser' at time 1773131847.590 for reason 'discarding message because the queue is full'
+[component_container_isolated-1] [INFO] [1773131848.689846007] [amcl]: Message Filter dropping message: frame 'base_laser' at time 1773131847.690 for reason 'discarding message because the queue is full'
+[component_container_isolated-1] [INFO] [1773131848.789847348] [amcl]: Message Filter dropping message: frame 'base_laser' at time 1773131847.790 for reason 'discarding message because the queue is full'
+[component_container_isolated-1] [INFO] [1773131848.889965189] [amcl]: Message Filter dropping message: frame 'base_laser' at time 1773131847.890 for reason 'discarding message because the queue is full'
+[component_container_isolated-1] [INFO] [1773131848.954259988] [local_costmap.local_costmap]: Timed out waiting for transform from base_link to odom to become available, tf error: Invalid frame ID "odom" passed to canTransform argument target_frame - frame does not exist
+[component_container_isolated-1] [INFO] [1773131848.989811142] [amcl]: Message Filter dropping message: frame 'base_laser' at time 1773131847.990 for reason 'discarding message because the queue is full'
+[component_container_isolated-1] [INFO] [1773131849.089788188] [amcl]: Message Filter dropping message: frame 'base_laser' at time 1773131848.090 for reason 'discarding message because the queue is full'
+[component_container_isolated-1] [INFO] [1773131849.189795437] [amcl]: Message Filter dropping message: frame 'base_laser' at time 1773131848.190 for reason 'discarding message because the queue is full'
+[component_container_isolated-1] [INFO] [1773131849.289803667] [amcl]: Message Filter dropping message: frame 'base_laser' at time 1773131848.290 for reason 'discarding message because the queue is full'
+[component_container_isolated-1] [INFO] [1773131849.389810416] [amcl]: Message Filter dropping message: frame 'base_laser' at time 1773131848.390 for reason 'discarding message because the queue is full'
+[component_container_isolated-1] [INFO] [1773131849.454258344] [local_costmap.local_costmap]: Timed out waiting for transform from base_link to odom to become available, tf error: Invalid frame ID "odom" passed to canTransform argument target_frame - frame does not exist
+[component_container_isolated-1] [INFO] [1773131849.489873628] [amcl]: Message Filter dropping message: frame 'base_laser' at time 1773131848.490 for reason 'discarding message because the queue is full'
+[component_container_isolated-1] [INFO] [1773131849.589938581] [amcl]: Message Filter dropping message: frame 'base_laser' at time 1773131848.590 for reason 'discarding message because the queue is full'
+[component_container_isolated-1] [INFO] [1773131849.689814942] [amcl]: Message Filter dropping message: frame 'base_laser' at time 1773131848.690 for reason 'discarding message because the queue is full'
+[component_container_isolated-1] [INFO] [1773131849.789823191] [amcl]: Message Filter dropping message: frame 'base_laser' at time 1773131848.790 for reason 'discarding message because the queue is full'
+[component_container_isolated-1] [INFO] [1773131849.889840995] [amcl]: Message Filter dropping message: frame 'base_laser' at time 1773131848.890 for reason 'discarding message because the queue is full'
+[component_container_isolated-1] [INFO] [1773131849.954260109] [local_costmap.local_costmap]: Timed out waiting for transform from base_link to odom to become available, tf error: Invalid frame ID "odom" passed to canTransform argument target_frame - frame does not exist
+[component_container_isolated-1] [INFO] [1773131849.989958392] [amcl]: Message Filter dropping message: frame 'base_laser' at time 1773131848.990 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[component_container_isolated-1] [INFO] [1773131850.089864457] [amcl]: Message Filter dropping message: frame 'base_laser' at time 1773131849.090 for reason 'discarding message because the queue is full'
+[component_container_isolated-1] [INFO] [1773131850.189944725] [amcl]: Message Filter dropping message: frame 'base_laser' at time 1773131849.190 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[component_container_isolated-1] [INFO] [1773131850.289856808] [amcl]: Message Filter dropping message: frame 'base_laser' at time 1773131849.290 for reason 'discarding message because the queue is full'
+[component_container_isolated-1] [INFO] [1773131850.389909316] [amcl]: Message Filter dropping message: frame 'base_laser' at time 1773131849.390 for reason 'discarding message because the queue is full'
+[component_container_isolated-1] [INFO] [1773131850.454260986] [local_costmap.local_costmap]: Timed out waiting for transform from base_link to odom to become available, tf error: Invalid frame ID "odom" passed to canTransform argument target_frame - frame does not exist
+[component_container_isolated-1] [INFO] [1773131850.490186231] [amcl]: Message Filter dropping message: frame 'base_laser' at time 1773131849.490 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[component_container_isolated-1] [INFO] [1773131850.590003741] [amcl]: Message Filter dropping message: frame 'base_laser' at time 1773131849.590 for reason 'discarding message because the queue is full'
+[component_container_isolated-1] [INFO] [1773131850.689905787] [amcl]: Message Filter dropping message: frame 'base_laser' at time 1773131849.690 for reason 'discarding message because the queue is full'
+[component_container_isolated-1] [INFO] [1773131850.789970814] [amcl]: Message Filter dropping message: frame 'base_laser' at time 1773131849.790 for reason 'discarding message because the queue is full'
+[component_container_isolated-1] [INFO] [1773131850.794023205] [rclcpp]: signal_handler(signum=2)
+[component_container_isolated-1] [INFO] [1773131850.794896128] [lifecycle_manager_navigation]: Running Nav2 LifecycleManager rcl preshutdown (lifecycle_manager_navigation)

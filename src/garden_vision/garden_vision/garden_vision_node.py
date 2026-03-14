@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
 import rclpy
+import numpy as np
 from rclpy.node import Node
 from sensor_msgs.msg import Image
 from std_msgs.msg import String
 from cv_bridge import CvBridge
 import cv2
 import time
-import os
 
 # Import local modules
 from hardware_manager import HardwareInterface
@@ -15,130 +15,116 @@ from vision_processor import VisionProcessor
 class GardenVisionNode(Node):
     def __init__(self):
         super().__init__('garden_vision_node')
-        
-        self.get_logger().info("Initializing vision system...")
+        self.get_logger().info("Initializing vision tracking system...")
 
-        # --- 1. Init modules ---
         self.hw = HardwareInterface()
         self.vp = VisionProcessor()
         self.bridge = CvBridge()
         
-        # Setup photo directory
-        self.photo_dir = os.path.expanduser("~/ros2_ws/photos")
-        os.makedirs(self.photo_dir, exist_ok=True)
-        self.last_photo_time = 0
-        
-        # --- 2. Open camera ---
         self.cap = self.hw.set_camera()
-        
         if not self.cap.isOpened():
             self.get_logger().error("Critical Error: Cannot open camera!")
         
-        # --- 3. Control Parameters (Tuned for Stability) ---
-        # Lower Kp = Slower, smoother movement
-        # Previous was 0.04, now 0.02
+        # --- Tracking Parameters ---
         self.kp_pan = 0.02   
         self.kp_tilt = 0.02
-        
-        # Deadband: If error is less than this (pixels), DON'T move.
-        # This prevents jittering.
         self.deadband = 40 
-        
-        # Initial angles
         self.current_pan = 90.0
         self.current_tilt = 90.0
         
-        self.is_tracking = True
+        # --- Scanning Parameters ---
+        self.scan_pan_dir = 1.0   
+        self.scan_tilt_dir = 1.0  
+        self.scan_speed = 1.5     
+        self.tilt_step = 15.0     
+
+        self.get_logger().info("Waking up servos and centering...")
+        self.hw.move_servo(self.current_pan, self.current_tilt)
+        time.sleep(0.5) 
         
-        # --- 4. ROS Communication ---
+        # Start idle until commanded by the monitor
+        self.is_tracking = False
+        
+        # --- ROS Communication ---
         self.pub_image = self.create_publisher(Image, 'vision/camera_feed', 10)
         self.pub_status = self.create_publisher(String, 'vision/status', 10)
         self.create_subscription(String, 'vision/cmd', self.cmd_callback, 10)
 
-        # --- 5. Timer ---
         self.timer = self.create_timer(0.033, self.timer_callback)
-        self.get_logger().info("Vision node started (30Hz)")
 
     def cmd_callback(self, msg):
-        cmd = msg.data
-        if cmd == "START":
+        if msg.data == "START":
             self.is_tracking = True
-        elif cmd == "STOP":
+            self.get_logger().info("Received START: Hunting for flag...")
+        elif msg.data == "STOP":
             self.is_tracking = False
+            self.get_logger().info("Received STOP: Going idle.")
 
     def timer_callback(self):
-        # 1. Read frame
         ret, frame = self.cap.read()
         if not ret:
             return
 
-        # Optional: frame = cv2.flip(frame, -1) 
-
         status_msg = "IDLE"
-        final_display_frame = frame.copy() # Copy for display
+        final_display_frame = frame.copy() 
 
         if self.is_tracking:
             processed_frame, target_pos, found = self.vp.process_frame(frame)
             final_display_frame = processed_frame
             
             if found:
-                status_msg = "TRACKING"
                 cx, cy = target_pos
                 h, w, _ = frame.shape
                 center_x, center_y = w // 2, h // 2
                 
-                # Calculate Error
-                error_x = center_x - cx
-                error_y = center_y - cy
+                # The 150px offset to aim below the flag
+                y_offset_pixels = 150 
                 
-                # --- Stability Logic: Deadband ---
-                # Only move if error is BIGGER than deadband (40 pixels)
+                error_x = center_x - cx
+                error_y = center_y - (cy + y_offset_pixels)
+                
+                needs_movement = False
+                status_msg = "ADJUSTING"
+                
                 if abs(error_x) > self.deadband:
                     self.current_pan += error_x * self.kp_pan
-                    status_msg = "ADJUSTING"
+                    needs_movement = True
                 
                 if abs(error_y) > self.deadband:
                     self.current_tilt += error_y * self.kp_tilt
-                    status_msg = "ADJUSTING"
+                    needs_movement = True
                 
-                # Clamp angles
-                self.current_pan = max(0, min(180, self.current_pan))
-                self.current_tilt = max(45, min(135, self.current_tilt))
+                self.current_pan = max(0.0, min(180.0, self.current_pan))
+                self.current_tilt = max(45.0, min(135.0, self.current_tilt))
 
-                # Move Servo
-                self.hw.move_servo(self.current_pan, self.current_tilt)
+                if needs_movement:
+                    self.hw.move_servo(self.current_pan, self.current_tilt)
                 
-                # --- Photo Logic: Auto-Capture ---
-                # If target is roughly centered (inside deadband)
-                if abs(error_x) < self.deadband and abs(error_y) < self.deadband:
+                if not needs_movement:
                     status_msg = "LOCKED"
-                    current_time = time.time()
-                    # Cooldown: Take photo only every 3 seconds
-                    if current_time - self.last_photo_time > 3.0:
-                        self.take_photo(frame)
-                        self.last_photo_time = current_time
                         
             else:
                 status_msg = "SEARCHING"
+                # Raster Scan Logic
+                self.current_pan += (self.scan_speed * self.scan_pan_dir)
+                if self.current_pan >= 180.0 or self.current_pan <= 0.0:
+                    self.scan_pan_dir *= -1.0  
+                    self.current_tilt += (self.tilt_step * self.scan_tilt_dir)
+                    if self.current_tilt >= 135.0 or self.current_tilt <= 45.0:
+                        self.scan_tilt_dir *= -1.0  
+                
+                self.current_pan = max(0.0, min(180.0, self.current_pan))
+                self.current_tilt = max(45.0, min(135.0, self.current_tilt))
+                self.hw.move_servo(self.current_pan, self.current_tilt)
         
-        # 3. Publish
         self.pub_status.publish(String(data=status_msg))
         try:
-            # Add status text to image
             cv2.putText(final_display_frame, f"Mode: {status_msg}", (10, 30), 
                        cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 255, 0), 2)
             ros_img = self.bridge.cv2_to_imgmsg(final_display_frame, "bgr8")
             self.pub_image.publish(ros_img)
         except Exception:
             pass
-
-    def take_photo(self, frame):
-        """Save the current frame to disk"""
-        timestamp = time.strftime("%Y%m%d-%H%M%S")
-        filename = f"{self.photo_dir}/target_{timestamp}.jpg"
-        cv2.imwrite(filename, frame)
-        self.get_logger().info(f"📸 SNAPSHOT SAVED: {filename}")
-        print(f"--- [Camera] Photo saved to {filename} ---")
 
     def __del__(self):
         if hasattr(self, 'cap') and self.cap.isOpened():

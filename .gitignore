@@ -2,6 +2,7 @@
 build/
 install/
 log/
+2_demo
 
 # Python artifacts
 __pycache__/

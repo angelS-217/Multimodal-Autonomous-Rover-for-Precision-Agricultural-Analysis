@@ -1,0 +1,20 @@
+slam_toolbox:
+  ros__parameters:
+    # Frame Names (Critical for anchoring the map)
+    odom_frame: odom
+    map_frame: map
+    base_frame: base_link
+    scan_topic: /scan
+    
+    # Mode and Performance
+    mode: mapping
+    resolution: 0.05
+    transform_timeout: 0.5
+    
+    # Smearing / Ghosting Fixes (Only update map when actually moving)
+    minimum_travel_distance: 0.25
+    minimum_travel_heading: 0.25
+    
+    # Lidar Settings (LD19 usually hits around 8-12 meters reliably)
+    max_laser_range: 12.0
+    minimum_time_interval: 0.1

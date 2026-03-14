@@ -34,7 +34,7 @@ def generate_launch_description():
         {'frame_id': 'base_laser'},
         {'port_name': '/dev/ttyAMA0'},
         {'port_baudrate': 230400},
-        {'laser_scan_dir': True},
+        {'laser_scan_dir': True},  # Toggle to adjust for CW rotating lidars
         {'enable_angle_crop_func': False},
         {'angle_crop_min': 135.0},
         {'angle_crop_max': 225.0}
@@ -54,6 +54,6 @@ def generate_launch_description():
   ld = LaunchDescription()
 
   ld.add_action(ldlidar_node)
-  ld.add_action(base_link_to_laser_tf_node)
+  # ld.add_action(base_link_to_laser_tf_node)
 
   return ld
