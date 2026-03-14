@@ -3,15 +3,15 @@ Angel Pulido - WPRs
 Arduino
 Arduino
 Lectures
+Instructions
 Resources
 Syllabus
-P2P_Heltec-ESP32-V3
 EE 175.code-workspace
+Documents/Essays
+Documents/Team Member Evaluations
 
-# PlatformIO - Temporary build files
-.pio/
-.pioenvs/
-.piolibdeps/
+# PlatformIO
+P2P_Heltec-ESP32-V3
 
 # VS Code - Local user settings
 .vscode/

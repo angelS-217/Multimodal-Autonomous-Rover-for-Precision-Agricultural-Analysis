@@ -9,7 +9,7 @@
 * [Battery +]---[10k]---|
 * [GPIO2]
 * [Battery -]---[2k]----|
-* Last updated: 2/11/2026
+* Last updated: 3/1/2026
 * Author: JoseAngel Socorro Pulido
 */
 #include "heltec_unofficial.h"
@@ -27,19 +27,16 @@ const float R2 = 2000.0;  // 2k Ohm
 const float V_REF = 3.3; 
 
 // Low Battery Safety Settings =================
-// 10.5V is approx 3.5V per cell for a 3S LiPo.
-// This leaves enough headroom for the Pi to shut down safely.
-#define LOW_BAT_THRESH 10.5  
+#define LOW_BAT_THRESH 9  
 unsigned long lowBatTimer = 0;
 bool shutdownTriggered = false;
 const int LOW_BAT_TIMEOUT = 5000; // 5 seconds of sustained low voltage
 
-// Function Protypes ===========================
+// Function Prototypes ===========================
 void updateDisp(String dir, float x, float y, float voltage);
 void fixDisp();
 float getVoltage();
 void checkBatteryHealth(float voltage);
-
 
 void setup() {
   heltec_setup();
@@ -72,23 +69,42 @@ void loop() {
 
   String cmd;
   
-  // Always monitor battery, even if no packets are coming in
   float currentVolts = getVoltage();
   checkBatteryHealth(currentVolts);
 
-  // If we already triggered shutdown, stop processing loop to avoid interference
   if (shutdownTriggered) {
-    heltec_led(50); // Dim LED to indicate "Done"
+    heltec_led(50); 
     delay(1000);
     return; 
   }
 
-  // Check for incoming LoRa packet
+  // ===================================================================
+  // Check if the Pi wants to transmit a CSV Log to the laptop
+  // ===================================================================
+  if (Serial.available() > 0) {
+    String outMsg = Serial.readStringUntil('\n');
+    outMsg.trim();
+    
+    if (outMsg.startsWith("LOG:")) {
+      display.clear();
+      display.setFont(ArialMT_Plain_16);
+      display.drawString(0, 25, "Transmitting Log...");
+      display.display();
+      
+      radio.transmit(outMsg);
+      radio.startReceive();
+      
+      updateDisp("AUTO", 0, 0, currentVolts); 
+    }
+  }
+
+  // ===================================================================
+  // Check for incoming LoRa packet (Joystick Commands from Laptop)
+  // ===================================================================
+  
   int state = radio.receive(cmd);
 
   if (state == RADIOLIB_ERR_NONE) {
-    // Packet Received!
-
     cmd.trim();
     Serial.println(cmd);
 
@@ -98,8 +114,7 @@ void loop() {
       display.setFont(ArialMT_Plain_16);
       display.drawString(0, 25, "Shutting Down...");
       display.display();
-
-      delay(3000);  // delay 3 seconds
+      // REMOVED: delay(3000); 
     }
     // Read Mode Toggle 
     else if (cmd == "CMD:MODE_AUTO" || cmd == "CMD:MODE_MANUAL") {
@@ -122,11 +137,10 @@ void loop() {
       heltec_led(0); delay(45);
       heltec_led(100); 
 
-      delay(2000);  // delay 2 seconds
+      // REMOVED: delay(2000);  
     }
     // Read Movement 
     else if (cmd.startsWith("M:")) {
-      // parse e.g "M:-0.50,0.80"
       int commaidx = cmd.indexOf(',');
       if (commaidx != -1) {
         String xStr = cmd.substring(2, commaidx);
@@ -138,7 +152,7 @@ void loop() {
         String dir = "STOP";
         if (abs(x) > STICK_THRESH || abs(y) > STICK_THRESH) {
           if (abs(x) > abs(y)) {
-            dir = (x < 0) ? "LEFT" : "RIGHT";  // if x < 0: left | else: right
+            dir = (x < 0) ? "LEFT" : "RIGHT";
           }
           else {
             dir = (y < 0) ? "UP" : "DOWN";
@@ -147,95 +161,73 @@ void loop() {
         updateDisp(dir, x, y, currentVolts);
       }
     }
-    // Raw message backup
     else {
-      
         display.clear();
         display.drawString(0, 0, "Raw Msg:");
         display.drawString(0, 15, cmd);
         display.display();
     }
     
-    delay(50);  // delay for blink
-    heltec_led(100);  // turn LED solid white
+    delay(50);  
+    heltec_led(100);  
   }
 }
 
 float getVoltage() {
   long sum = 0;
-  // Take 10 samples (smoothes noise)
   for(int i=0; i<10; i++){
     sum += analogRead(BAT_PIN);
     delay(1);
   }
   float avg_adc = sum / 10.0;
-
-  // Compute Voltage at Pin (0 - 3.3V)
   float pin_voltage = avg_adc * (V_REF / 4095.0);
-
-  // Compute Actual Battery Voltage
   float bat_voltage = pin_voltage * ((R1 + R2) / R2);
 
   return bat_voltage;
 }
 
 void checkBatteryHealth(float voltage) {
-  // If voltage is critically low
   if (voltage < LOW_BAT_THRESH) {
-    
-    // Start timer if not started
     if (lowBatTimer == 0) {
       lowBatTimer = millis();
     }
     
-    // If timer exceeds safety window (5 seconds)
     if (millis() - lowBatTimer > LOW_BAT_TIMEOUT && !shutdownTriggered) {
       shutdownTriggered = true;
 
-      // 1. Tell the Pi to shutdown
       Serial.println("CMD:SHUTDOWN");
 
-      // 2. Alert on OLED
       display.clear();
       display.setFont(ArialMT_Plain_16);
-      display.drawString(0, 0, "!!! CRITICAL BAT !!!");
+      display.drawString(0, 0, "LOW BATTERY");
       display.drawString(0, 20, "Voltage: " + String(voltage, 2) + "V");
+      display.setFont(ArialMT_Plain_10);
       display.drawString(0, 40, "Shutting Down Pi...");
       display.display();
       
-      // 3. Alert on LED (Red strobe effect via brightness if standard led)
-      // Heltec built-in LED is single color usually, so we just blink fast
       for(int i=0; i<10; i++) {
         heltec_led(0); delay(100);
         heltec_led(100); delay(100);
       }
     }
   } else {
-    // Reset timer if voltage recovers (e.g. motor stopped)
     lowBatTimer = 0;
   }
 }
 
 void updateDisp(String dir, float x, float y, float voltage) {
-  /* Draws the UI */
-
   display.clear();
   
-  // Main Direction
   display.setFont(ArialMT_Plain_24);
   display.drawString(0, 0, dir);
   
-  // Debug Stats
   display.setFont(ArialMT_Plain_10);
   String stats = "X: " + String(x, 2) + "  Y: " + String(y, 2);
   display.drawString(0, 30, stats);
   
-  // Signal Strength
   String rssi = "RSSI: " + String(radio.getRSSI());
   display.drawString(0, 42, rssi);
 
-  // Battery Voltage
-  // Mapping 3S Lipo Range: 11.1V (0%) to 12.6V (100%)
   int pct = map(voltage * 100, 1110, 1260, 0, 100);
   pct = constrain(pct, 0, 100);
 
@@ -246,17 +238,16 @@ void updateDisp(String dir, float x, float y, float voltage) {
 }
 
 void fixDisp() {
-  /* Forces VEXT on and manually overrides I2C to correct dim OLED */
   pinMode(36, OUTPUT); 
-  digitalWrite(36, LOW); // Active LOW
+  digitalWrite(36, LOW); 
   delay(50); 
 
   Wire.beginTransmission(0x3c);
-  Wire.write(0x80); Wire.write(0x8D); // charge pump
-  Wire.write(0x80); Wire.write(0x14); // enable 
+  Wire.write(0x80); Wire.write(0x8D); 
+  Wire.write(0x80); Wire.write(0x14); 
   Wire.endTransmission();
   
   Wire.beginTransmission(0x3c);
-  Wire.write(0x80); Wire.write(0xAF); // display ON
+  Wire.write(0x80); Wire.write(0xAF); 
   Wire.endTransmission();
 }
